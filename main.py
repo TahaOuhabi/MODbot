@@ -49,8 +49,10 @@ async def create_textchannel(context,nom_channel):
     try:
         nouvelle_channel= await guild.create_text_channel(nom_channel)
         await context.send(f"Salon textuel de nom {nom_channel} créé")
+    except discord.Forbidden:
+        await context.send("Je n'ai pas la permission de créer des salons!")
 @bot.command()
-@commands.has_permissions(admninistrator=True)
+@commands.has_permissions(administrator=True)
 async def create_voicechannel(context,nom_channel):
     guild=context.guild
     channel=discord.utils.get(guild.channels,name=nom_channel)
@@ -60,6 +62,35 @@ async def create_voicechannel(context,nom_channel):
     try:
         nouvelle_channel= await guild.create_voice_channel(nom_channel)
         await context.send(f"Salon vocal de nom {nom_channel} créé")
+    except discord.Forbidden:
+        await context.send("Je n'ai pas la permission de créer des salons!")
+@bot.command()
+@commands.has_permissions(manage_channels=True)
+async def delete_textchannel(context,channel:discord.TextChannel):
+    try:
+        await channel.delete()
+        await context.send(f"Salon de texte {channel.name} effacé")
+    except discord.Forbidden:
+        context.send(f"J'ai pas la permission d'effectuer cette action")
+    except discord.NotFound:
+        context.send(f"Salon de texte non trouvé")
+@bot.command()
+@commands.has_permissions(manage_channels=True)
+async def delete_voicechannel(context,channel:discord.VoiceChannel):
+    try:
+        await channel.delete()
+        await context.send(f"Salon vocal {channel.name} supprimé")
+    except discord.Forbidden:
+        await context.send(f"J'ai pas la permission pour effectuer cette action")
+    except discord.NotFound:
+        await context.send(f"Salon vocal non trouvé")
+@bot.command()
+async def commandes(context):
+    await context.send(f"\n\n**1- Créer un salon vocal: ?create_voicechannel [nom]**"
+                       f"\n\n**2- Créer un salon texte: ?Create_textchanne [nom]**"
+                       f"\n\n**3- Supprimer un salon vocal: ?delete_voicechannel [nom]** "
+                       f"\n\n**4- Supprimer un Salon texte: ?delete_textchannel [nom]**"
+                       f"\n\n**5- afficher les commandes: ?commandes**")
 
 
 
