@@ -15,3 +15,10 @@ Commandes administrateur :
 ?create_textchannel <nom> : crée un salon textuel.
 
 ?create_voicechannel <nom> : crée un salon vocal.
+
+?delete_voicechannel <nom> : supprime un salon vocal.
+
+?delete_textchannel <nom> : supprime un salon text.
+
+?commandes : affiche les commandes et leurs utilitées
+
