@@ -1,6 +1,6 @@
 # MODbot
 Bot Discord – Gestion de serveur et modération
-Ce projet est un bot Discord écrit en Python, basé sur la bibliothèque discord.py.
+un bot Discord écrit en Python, basé sur la bibliothèque discord.py.
 Il fournit des fonctionnalités simples pour automatiser la gestion d’un serveur.
 
 Fonctionnalités principales
